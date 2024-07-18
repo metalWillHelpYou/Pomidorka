@@ -17,20 +17,13 @@ struct SettingsView: View {
             VStack {
                 List {
                     themePicker
+                    Text("Notificsations")
+                    Text("Language")
                 }
+                .listStyle(PlainListStyle())
+                .background(Color.clear)
                 
-                VStack {
-                    Spacer()
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(.highlight, lineWidth: 2)
-                            .frame(width: 350, height: 350)
-                        
-                        timePickers
-                    }
-                    
-                    Spacer()
-                }
+                setupTimer
             }
             .navigationTitle("Settings")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -53,11 +46,33 @@ extension SettingsView {
         }
     }
     
+    private var setupTimer: some View {
+        VStack {
+            Spacer()
+            ZStack{
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.highlight, lineWidth: 2)
+                    .frame(width: 350, height: 350)
+                
+                VStack {
+                    Spacer()
+                    timePickers
+                    
+                    Spacer()
+                    
+                    setDefaultValuesButton
+                }
+            }
+            
+            Spacer()
+        }
+    }
+    
     private var timePickers: some View {
         HStack(spacing: 20) {
-             VStack {
+            VStack {
                 Text("Work time")
-                 
+                
                 Picker("Work Time", selection: $workTime) {
                     ForEach(0..<60) { minute in
                         Text("\(minute) m").tag(minute)
@@ -71,7 +86,7 @@ extension SettingsView {
                 Text("Relax time")
                 
                 Picker("Minutes", selection: $relaxTime) {
-                    ForEach(0..<60) { minute in
+                    ForEach(0..<30) { minute in
                         Text("\(minute) m").tag(minute)
                     }
                 }
@@ -79,6 +94,25 @@ extension SettingsView {
                 .frame(width: 80, height: 100)
             }
         }
-        .padding(.top, 40)
+    }
+    
+    private var setDefaultValuesButton: some View {
+        Button(action: {
+            setDefaultValues()
+        }, label: {
+            Text("Reset")
+                .padding()
+                .padding(.horizontal)
+                .background(Color.highlight)
+                .foregroundStyle(Color.text)
+                .font(.headline)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+        })
+        .padding(.vertical)
+    }
+    
+    private func setDefaultValues() {
+        workTime = 25
+        relaxTime = 5
     }
 }

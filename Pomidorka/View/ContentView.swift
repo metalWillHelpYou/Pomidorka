@@ -48,6 +48,7 @@ extension ContentView {
     private var settingsLink: some View {
         NavigationLink(destination: SettingsView()) {
             Image(systemName: "gear")
+                .foregroundStyle(Color.highlight)
         }
     }
     
