@@ -1,48 +1,62 @@
 //
-//  SetUpTimerView.swift
+//  SettingsView.swift
 //  Pomidorka
 //
-//  Created by metalWillHelpYou on 17.07.2024.
+//  Created by metalWillHelpYou on 18.07.2024.
 //
 
 import SwiftUI
 
-struct SetUpTimerView: View {
-    @Environment(\.dismiss) var dismiss
-    
+struct SettingsView: View {
+    @AppStorage("userTheme") private var userTheme: Theme = .system
     @AppStorage("workTime") var workTime = 25
     @AppStorage("relaxTime") var relaxTime = 5
     
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer()
-                ZStack{
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(.highlight, lineWidth: 2)
-                        .frame(width: 350, height: 350)
-                    
-                    pickers
+                List {
+                    themePicker
                 }
                 
-                Spacer()
+                VStack {
+                    Spacer()
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.highlight, lineWidth: 2)
+                            .frame(width: 350, height: 350)
+                        
+                        timePickers
+                    }
+                    
+                    Spacer()
+                }
             }
-            .navigationTitle("Set up your time")
+            .navigationTitle("Settings")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.background.opacity(0.5))
+            .preferredColorScheme(userTheme.setTheme)
         }
     }
 }
 
 #Preview {
-    SetUpTimerView()
+    SettingsView()
 }
 
-extension SetUpTimerView {
-    private var pickers: some View {
+extension SettingsView {
+    private var themePicker: some View {
+        Picker("Apperance", selection: $userTheme) {
+            ForEach(Theme.allCases, id: \.self) { theme in
+                Text(theme.rawValue).tag(theme)
+            }
+        }
+    }
+    
+    private var timePickers: some View {
         HStack(spacing: 20) {
              VStack {
-                Text("Select work time")
+                Text("Work time")
                  
                 Picker("Work Time", selection: $workTime) {
                     ForEach(0..<60) { minute in
@@ -54,7 +68,7 @@ extension SetUpTimerView {
             }
             
             VStack {
-                Text("Select relax time")
+                Text("Relax time")
                 
                 Picker("Minutes", selection: $relaxTime) {
                     ForEach(0..<60) { minute in

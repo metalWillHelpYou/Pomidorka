@@ -8,36 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showTimer = false
-    @State private var showSettings = false
-    
+    @AppStorage("userTheme") private var userTheme: Theme = .system
     @AppStorage("workTime") var workTime = 25
     @AppStorage("relaxTime") var relaxTime = 5
     
+    @State private var showTimer = false
+    @State private var showSettings = false
+    
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color.background.opacity(0.5).ignoresSafeArea()
+            VStack(spacing: 56) {
+                Image("Tomato")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 200, height: 200)
                 
-                VStack(spacing: 56) {
-                    Image("Tomato")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                    
-                    boostProductivityButton
-                }
+                boostProductivityButton
             }
             .navigationTitle("Pomidorka")
-            .toolbar {
-                NavigationLink(destination: SetUpTimerView()) {
-                    Image(systemName: "gear")
-                }
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.background)
+            .preferredColorScheme(userTheme.setTheme)
             .popover(isPresented: $showTimer, content: {
                 TimerView(workTime: workTime, relaxTime: relaxTime)
                     .presentationCompactAdaptation(.fullScreenCover)
             })
+            .toolbar {
+                settingsLink
+            }
         }
     }
 }
@@ -47,6 +45,12 @@ struct ContentView: View {
 }
 
 extension ContentView {
+    private var settingsLink: some View {
+        NavigationLink(destination: SettingsView()) {
+            Image(systemName: "gear")
+        }
+    }
+    
     private var boostProductivityButton: some View {
         Button(action: {
             showTimer.toggle()
