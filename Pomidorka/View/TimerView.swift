@@ -11,6 +11,7 @@ struct TimerView: View {
     @AppStorage("workTime") private var workTime = 25
     @AppStorage("relaxTime") private var relaxTime = 5
     @Environment(\.dismiss) var dismiss
+    @State private var showAlert = false
     
     @State private var isTimerRunning = false
     @State private var timeRemaining: Int = 0
@@ -45,6 +46,9 @@ struct TimerView: View {
             if !isWorkTime {
                 resetTimer()
             }
+        }
+        .alert(isPresented: $showAlert) {
+            getAlert()
         }
         .background(.black)
     }
@@ -94,9 +98,7 @@ extension TimerView {
     
     private var stopButton: some View {
         Button(action: {
-            isWorkTime = false
-            isTimerRunning = false
-            dismiss()
+            showAlert.toggle()
         }, label: {
             Text("Stop")
                 .padding()
@@ -131,5 +133,19 @@ extension TimerView {
         let minutes = seconds / 60
         let seconds = seconds % 60
         return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    private func getAlert() -> Alert {
+        Alert(
+            title: Text("Are you sure?"),
+            message: Text("Timer wiil be reset"),
+            primaryButton: .default(Text("Resume"), action: {
+            }),
+            secondaryButton: .destructive(Text("Stop"), action: {
+                isWorkTime = false
+                isTimerRunning = false
+                dismiss()
+            })
+        )
     }
 }
