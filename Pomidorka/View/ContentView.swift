@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showTimer = false
+    @State private var showSettings = false
+    
+    @AppStorage("workTime") var workTime = 25
+    @AppStorage("relaxTime") var relaxTime = 5
     
     var body: some View {
         NavigationStack {
@@ -25,8 +29,13 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Pomidorka")
+            .toolbar {
+                NavigationLink(destination: SetUpTimerView()) {
+                    Image(systemName: "gear")
+                }
+            }
             .popover(isPresented: $showTimer, content: {
-                TimerView()
+                TimerView(workTime: workTime, relaxTime: relaxTime)
                     .presentationCompactAdaptation(.fullScreenCover)
             })
         }
@@ -43,10 +52,9 @@ extension ContentView {
             showTimer.toggle()
         }, label: {
             Text("Boost productivity")
-                .frame(width: 150, height: 24)
                 .padding()
                 .padding(.horizontal)
-                .background(Color.background)
+                .background(Color.highlight)
                 .foregroundStyle(Color.text)
                 .font(.headline)
                 .clipShape(RoundedRectangle(cornerRadius: 10))

@@ -11,6 +11,9 @@ struct TimerView: View {
     @Environment(\.dismiss) var dismiss
     @State private var isTimeRunning = false
     
+    @AppStorage("workTime") var workTime = 25
+    @AppStorage("relaxTime") var relaxTime = 5
+    
     var body: some View {
         VStack {
             Spacer()
@@ -41,7 +44,7 @@ extension TimerView {
                     .font(.title)
                     .foregroundStyle(.white)
                 
-                Text("25:00")
+                Text("\(workTime)")
                     .font(.title)
                     .foregroundStyle(.white)
                 
