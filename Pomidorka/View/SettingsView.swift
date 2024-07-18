@@ -17,7 +17,7 @@ struct SettingsView: View {
             VStack {
                 List {
                     themePicker
-                    Text("Notificsations")
+                    
                     Text("Language")
                 }
                 .listStyle(PlainListStyle())
@@ -74,7 +74,7 @@ extension SettingsView {
                 Text("Work time")
                 
                 Picker("Work Time", selection: $workTime) {
-                    ForEach(0..<60) { minute in
+                    ForEach(1..<61) { minute in
                         Text("\(minute) m").tag(minute)
                     }
                 }
@@ -86,7 +86,7 @@ extension SettingsView {
                 Text("Relax time")
                 
                 Picker("Minutes", selection: $relaxTime) {
-                    ForEach(0..<30) { minute in
+                    ForEach(1..<31) { minute in
                         Text("\(minute) m").tag(minute)
                     }
                 }

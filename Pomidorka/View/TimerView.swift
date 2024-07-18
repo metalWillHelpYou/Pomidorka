@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct TimerView: View {
+    @AppStorage("workTime") private var workTime = 25
+    @AppStorage("relaxTime") private var relaxTime = 5
     @Environment(\.dismiss) var dismiss
-    @State private var isTimeRunning = false
     
-    @AppStorage("workTime") var workTime = 25
-    @AppStorage("relaxTime") var relaxTime = 5
+    @State private var isTimerRunning = false
+    @State private var timeRemaining: Int = 0
+    @State private var isWorkTime = true
     
     var body: some View {
         VStack {
@@ -22,7 +24,27 @@ struct TimerView: View {
             
             Spacer()
             
-            stopButton
+            HStack(spacing: 16) {
+                stopButton
+                pauseButton
+            }
+            .padding(.horizontal)
+            .padding(.vertical)
+        }
+        .onAppear {
+            resetTimer()
+            isTimerRunning.toggle()
+            startTimer()
+        }
+        .onChange(of: workTime) { oldWorkTime, newWorkTime in
+            if isWorkTime {
+                resetTimer()
+            }
+        }
+        .onChange(of: relaxTime) { oldRelaxTime, newRelaxTime in
+            if !isWorkTime {
+                resetTimer()
+            }
         }
         .background(.black)
     }
@@ -40,15 +62,13 @@ extension TimerView {
                 .frame(width: 350, height: 350)
             
             VStack(spacing: 16) {
-                Text("Time remaining:")
+                Text(isWorkTime ? "Work Time:" : "Relax Time:")
                     .font(.title)
                     .foregroundStyle(.white)
                 
-                Text("\(workTime)")
+                Text("\(formattedString(from: timeRemaining))")
                     .font(.title)
                     .foregroundStyle(.white)
-                
-                pauseButton
             }
         }
         .frame(maxWidth: .infinity)
@@ -56,34 +76,60 @@ extension TimerView {
     
     private var pauseButton: some View {
         Button(action: {
-            
+            isTimerRunning.toggle()
+            if isTimerRunning {
+                startTimer()
+            }
         }, label: {
-            Text("Pause")
+            Text(isTimerRunning ? "Pause" : "Start")
+                .frame(maxWidth: .infinity)
                 .padding()
                 .padding(.horizontal)
-                .background(.white)
-                .foregroundStyle(.black)
-            
+                .background(Color.highlight)
+                .foregroundColor(.text)
                 .font(.headline)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         })
-        .padding(.top)
     }
     
     private var stopButton: some View {
         Button(action: {
+            isWorkTime = false
+            isTimerRunning = false
             dismiss()
         }, label: {
             Text("Stop")
-                .frame(height: 24)
-                .frame(maxWidth: .infinity)
                 .padding()
                 .padding(.horizontal)
-                .background(Color.red)
+                .background(Color.cancel)
                 .foregroundStyle(.black)
                 .font(.headline)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         })
-        .padding(.horizontal, 24)
+    }
+}
+
+extension TimerView {
+    private func resetTimer() {
+        timeRemaining = (isWorkTime ? workTime : relaxTime) * 60
+    }
+    
+    private func startTimer() {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if !isTimerRunning {
+                timer.invalidate()
+            } else if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                isWorkTime.toggle()
+                resetTimer()
+            }
+        }
+    }
+    
+    private func formattedString(from seconds: Int) -> String {
+        let minutes = seconds / 60
+        let seconds = seconds % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }

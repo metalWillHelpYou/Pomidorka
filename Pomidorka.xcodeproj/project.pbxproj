@@ -58,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				9B47F9A52C484EE200487C70 /* Model */,
-				9B47F9A42C484ED500487C70 /* ViewModel */,
 				9B47F9A32C484ECA00487C70 /* View */,
 				9B47F9932C48424D00487C70 /* PomidorkaApp.swift */,
 				9B47F9972C48424E00487C70 /* Assets.xcassets */,
@@ -83,13 +82,6 @@
 				9B90B9872C491567004ABFFE /* SettingsView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		9B47F9A42C484ED500487C70 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9B47F9A52C484EE200487C70 /* Model */ = {

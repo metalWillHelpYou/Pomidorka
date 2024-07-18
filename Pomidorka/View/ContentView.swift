@@ -12,8 +12,8 @@ struct ContentView: View {
     @AppStorage("workTime") var workTime = 25
     @AppStorage("relaxTime") var relaxTime = 5
     
-    @State private var showTimer = false
     @State private var showSettings = false
+    @State private var showTimer = false
     
     var body: some View {
         NavigationStack {
@@ -30,7 +30,7 @@ struct ContentView: View {
             .background(Color.background)
             .preferredColorScheme(userTheme.setTheme)
             .popover(isPresented: $showTimer, content: {
-                TimerView(workTime: workTime, relaxTime: relaxTime)
+                TimerView()
                     .presentationCompactAdaptation(.fullScreenCover)
             })
             .toolbar {
