@@ -25,6 +25,7 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 200, height: 200)
+                        .shadow(radius: 10)
                     
                     boostProductivityButton
                 } else {
@@ -66,7 +67,7 @@ extension ContentView {
     private var settingsLink: some View {
         NavigationLink(destination: SettingsView()) {
             Image(systemName: "gear")
-                .foregroundStyle(Color.highlight)
+                .foregroundStyle(Color.cancel)
         }
     }
     
@@ -81,6 +82,7 @@ extension ContentView {
                 .foregroundStyle(Color.text)
                 .font(.headline)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 10)
         })
     }
     
@@ -95,6 +97,7 @@ extension ContentView {
                 .foregroundStyle(Color.text)
                 .font(.headline)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 10)
         })
     }
 }

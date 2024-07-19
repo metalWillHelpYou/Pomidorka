@@ -15,6 +15,7 @@
 		9B90B9842C491461004ABFFE /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B9832C491461004ABFFE /* ThemeManager.swift */; };
 		9B90B9882C491567004ABFFE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B9872C491567004ABFFE /* SettingsView.swift */; };
 		9B90B9902C4A9439004ABFFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B98F2C4A9439004ABFFE /* NotificationManager.swift */; };
+		9B99F9732C4AD48A00FAAF31 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B99F9722C4AD48A00FAAF31 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		9B90B9832C491461004ABFFE /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		9B90B9872C491567004ABFFE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9B90B98F2C4A9439004ABFFE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		9B99F9722C4AD48A00FAAF31 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				9B47F9A52C484EE200487C70 /* Model */,
 				9B47F9A32C484ECA00487C70 /* View */,
 				9B47F9932C48424D00487C70 /* PomidorkaApp.swift */,
+				9B99F9722C4AD48A00FAAF31 /* Launch Screen.storyboard */,
 				9B47F9972C48424E00487C70 /* Assets.xcassets */,
 				9B47F9992C48424E00487C70 /* Preview Content */,
 			);
@@ -89,18 +92,10 @@
 		9B47F9A52C484EE200487C70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9B90B9822C491449004ABFFE /* Helpers */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		9B90B9822C491449004ABFFE /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
 				9B90B9832C491461004ABFFE /* ThemeManager.swift */,
 				9B90B98F2C4A9439004ABFFE /* NotificationManager.swift */,
 			);
-			path = Helpers;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B99F9732C4AD48A00FAAF31 /* Launch Screen.storyboard in Resources */,
 				9B47F99B2C48424E00487C70 /* Preview Assets.xcassets in Resources */,
 				9B47F9982C48424E00487C70 /* Assets.xcassets in Resources */,
 			);
@@ -315,6 +311,7 @@
 				DEVELOPMENT_TEAM = M68A594A7Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pomidorka/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,6 +341,7 @@
 				DEVELOPMENT_TEAM = M68A594A7Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Pomidorka/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

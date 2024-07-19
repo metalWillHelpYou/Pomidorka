@@ -144,7 +144,7 @@ extension TimerView {
     private func getAlert() -> Alert {
         Alert(
             title: Text("Are you sure?"),
-            message: Text("Timer wiil be reset"),
+            message: Text("Attention: timer will reset"),
             primaryButton: .default(Text("Resume"), action: {
             }),
             secondaryButton: .destructive(Text("Stop"), action: {

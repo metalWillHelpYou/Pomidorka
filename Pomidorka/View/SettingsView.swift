@@ -17,8 +17,6 @@ struct SettingsView: View {
             VStack {
                 List {
                     themePicker
-                    
-                    Text("Language")
                 }
                 .listStyle(PlainListStyle())
                 .background(Color.clear)
@@ -39,7 +37,7 @@ struct SettingsView: View {
 
 extension SettingsView {
     private var themePicker: some View {
-        Picker("Apperance", selection: $userTheme) {
+        Picker("Appearance", selection: $userTheme) {
             ForEach(Theme.allCases, id: \.self) { theme in
                 Text(theme.rawValue).tag(theme)
             }
@@ -49,6 +47,9 @@ extension SettingsView {
     private var setupTimer: some View {
         VStack {
             Spacer()
+            
+            Text("Set up your time")
+                .font(.title)
             ZStack{
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(.highlight, lineWidth: 2)
@@ -72,6 +73,7 @@ extension SettingsView {
         HStack(spacing: 20) {
             VStack {
                 Text("Work time")
+                    .font(.headline)
                 
                 Picker("Work Time", selection: $workTime) {
                     ForEach(1..<61) { minute in
@@ -84,6 +86,7 @@ extension SettingsView {
             
             VStack {
                 Text("Relax time")
+                    .font(.headline)
                 
                 Picker("Minutes", selection: $relaxTime) {
                     ForEach(1..<31) { minute in
@@ -100,13 +103,14 @@ extension SettingsView {
         Button(action: {
             setDefaultValues()
         }, label: {
-            Text("Reset")
+            Text("Set as default")
                 .padding()
                 .padding(.horizontal)
                 .background(Color.highlight)
                 .foregroundStyle(Color.text)
                 .font(.headline)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 10)
         })
         .padding(.vertical)
     }
