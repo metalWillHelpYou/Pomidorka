@@ -14,6 +14,7 @@
 		9B47F9A22C48484600487C70 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B47F9A12C48484600487C70 /* TimerView.swift */; };
 		9B90B9842C491461004ABFFE /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B9832C491461004ABFFE /* ThemeManager.swift */; };
 		9B90B9882C491567004ABFFE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B9872C491567004ABFFE /* SettingsView.swift */; };
+		9B90B9902C4A9439004ABFFE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B90B98F2C4A9439004ABFFE /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		9B47F9A12C48484600487C70 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		9B90B9832C491461004ABFFE /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		9B90B9872C491567004ABFFE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9B90B98F2C4A9439004ABFFE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				9B90B9832C491461004ABFFE /* ThemeManager.swift */,
+				9B90B98F2C4A9439004ABFFE /* NotificationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B90B9902C4A9439004ABFFE /* NotificationManager.swift in Sources */,
 				9B90B9842C491461004ABFFE /* ThemeManager.swift in Sources */,
 				9B47F9A22C48484600487C70 /* TimerView.swift in Sources */,
 				9B90B9882C491567004ABFFE /* SettingsView.swift in Sources */,
@@ -321,7 +325,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Pomidorka;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MindCalm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -350,7 +354,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Pomidorka;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MindCalm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

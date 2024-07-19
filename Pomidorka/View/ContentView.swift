@@ -11,6 +11,8 @@ struct ContentView: View {
     @AppStorage("userTheme") private var userTheme: Theme = .system
     @AppStorage("workTime") var workTime = 25
     @AppStorage("relaxTime") var relaxTime = 5
+    @EnvironmentObject var notificationManager: NotificationManager
+    @Environment(\.scenePhase) var scenePhase
     
     @State private var showSettings = false
     @State private var showTimer = false
@@ -18,12 +20,16 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 56) {
-                Image("Tomato")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 200, height: 200)
-                
-                boostProductivityButton
+                if notificationManager.isGranted {
+                    Image("Tomato")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 200)
+                    
+                    boostProductivityButton
+                } else {
+                    openSettingsButton
+                }
             }
             .navigationTitle("Pomidorka")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -36,12 +42,24 @@ struct ContentView: View {
             .toolbar {
                 settingsLink
             }
+            .task {
+                try? await notificationManager.requestAutorization()
+            }
+            .onChange(of: scenePhase) { oldValue, newValue in
+                if newValue == .active {
+                    Task{
+                        await notificationManager.getCurrentSettings()
+                        await notificationManager.getPendingRequests()
+                    }
+                }
+            }
         }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(NotificationManager())
 }
 
 extension ContentView {
@@ -57,6 +75,20 @@ extension ContentView {
             showTimer.toggle()
         }, label: {
             Text("Boost productivity")
+                .padding()
+                .padding(.horizontal)
+                .background(Color.highlight)
+                .foregroundStyle(Color.text)
+                .font(.headline)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+        })
+    }
+    
+    private var openSettingsButton: some View {
+        Button(action: {
+            notificationManager.openSettings()
+        }, label: {
+            Text("Turn on notifications")
                 .padding()
                 .padding(.horizontal)
                 .background(Color.highlight)

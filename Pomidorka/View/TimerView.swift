@@ -10,6 +10,7 @@ import SwiftUI
 struct TimerView: View {
     @AppStorage("workTime") private var workTime = 25
     @AppStorage("relaxTime") private var relaxTime = 5
+    @EnvironmentObject var notificationManager: NotificationManager
     @Environment(\.dismiss) var dismiss
     @State private var showAlert = false
     
@@ -124,7 +125,12 @@ extension TimerView {
                 timeRemaining -= 1
             } else {
                 isWorkTime.toggle()
+                notificationManager.sendImmediateNotification(
+                    title: isWorkTime ? "Work Time" : "Relax Time",
+                    body: isWorkTime ? "Time to work!" : "Time to relax!"
+                )
                 resetTimer()
+                isTimerRunning = true
             }
         }
     }
